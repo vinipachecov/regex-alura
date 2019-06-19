@@ -7,6 +7,13 @@ Links
 - [Matching Simple number Sequence](#matching-simple-number)
 - [Quantifiers](#quantifiers)
   - [Quantifiers with range of repetitions](#quantifiers-with-range-of-repetitions)
+- [Classes](#classes)
+- [Anchors](#anchors)
+- [Groups](#groups)
+
+Resources:
+- <a href="https://regex101.com/">Regex101 (Regex online platform)</a>
+- <a href="http://repl.it/languages/javascript">Repl with Javascript</a>
 
 ### Regular Expresssions
 
@@ -69,6 +76,45 @@ Imagine we can have 3 triplets of numbers separated <strong>or not</strong> by d
 
 Ok but how we would handle the previous example if the separating character could be something else than a dot, maybe a comma?
 In this situation when we have a range of characters to be handled in a part of our string we can use a what is called as <strong>classes</strong> in Regex.
-<p>To define clases we use brackets to define characters we want to match. <strong>Remember</strong>:<p>
-Charaters inside the brackets are no longer meta-characters but literally the characters.
+<p>To define clases we use brackets to define characters we want to match. <strong>Remember</strong>: Charaters inside the brackets are no longer meta-characters but literally the characters.
 <p>The pattern that could match either dots or commas when separting the previous example would be like.</p>
+
+```
+/d{3}[.,]?\d{3}[,.]?\d{3}
+```
+
+Inside the brackets we see the set of chars that we expect to receive. Classes helps us to make regex expressions more readable for sure.
+
+### Anchors 
+Here is a list of anchors: 
+
+- \b word boundary, match something between words.
+- ^ beginning, match expressions in the beginning.
+- $ ending, match expressions in the end of your target.
+- \B non boundary, match everything not in the beginning neither in the end of words.
+
+Anchors are used widely in regex because patterns usually that usually require it have a specific part of the pattern to be matched. Check this html anchor tag:
+
+```
+<a href="http://www.google.com.br">LINK</a>
+```
+
+To match it's closing tag correctly we must use it the ^ and $ anchors:
+
+```
+^<a .+?(?=>)>\w+<\/a>$
+```
+With this expression we say that an anchor starts with "<a href" then we have multiple chars after it, stopping when finding a ">" getting only word chars as the link name and closing with a "<\/a>$" remembering that the \/ is to scape the the forward slash.
+
+### Groups
+When finding patterns, we usually have parts of our target that have a specific meaning, and having them separately is usally useful.
+
+([\w\s]+)\|(\d\d\/\d\d\/\d\d\d\d)\|([\w\s]+)\|(\d+)\|(\d{5}-\d{3})\|([\w\s]+)
+
+### Not selecting groups
+
+### Dealing with greedy quantifiers
+
+### Backreference
+
+### Uses of Regex in JS functions
